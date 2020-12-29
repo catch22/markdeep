@@ -486,6 +486,29 @@ var STYLESHEET = entag('style',
          'border-color:rgba(68,138,255,.4)' +
      '}' +
 
+    '.md .admonition.homework::before{' +
+       'content:"\\2753";' +
+       'font-weight:bold;' +
+       'font-size:150%;' +
+       'position:relative;' +
+       'top:3px;' +
+       'color:rgba(26,128,46,.8);' +
+       'left:-2.95rem;' +
+       'display:block;' +
+       'width:0;' +
+       'height:0' +
+     '}' +
+
+    '.md .admonition.solution{' +
+       'border-left:2.5rem solid rgba(90,90,90,.4);' +
+       'background-color:rgba(90,90,90,.15)' +
+    '}' +
+
+    '.md .admonition.solution::before{' +
+       'font-weight:bold;' +
+       'content:"Solution: ";' +
+    '}' +
+
     '.md .admonition.tip{' +
        'border-left:2.5rem solid rgba(50,255,90,.4);' +
        'background-color:rgba(50,255,90,.15)' +
@@ -3224,7 +3247,7 @@ function markdeepToHTML(str, elementMode) {
     // refTable['type_symbolicName'] = {number: number to link to, used: bool}
     var refTable = {};
 
-    str = str.rp(RegExp(/($|>)\s*/.source + '(' + keyword('figure') + '|' + keyword('table') + '|' + keyword('listing') + '|' + keyword('diagram') + ')' + /\s+\[(.+?)\]:/.source, 'gim'), function (match, prefix, _type, _ref) {
+    str = str.rp(RegExp(/($|>)\s*/.source + '(' + keyword('figure') + '|' + keyword('table') + '|' + keyword('listing') + '|' + keyword('diagram') + '|' + keyword('homework') + ')' + /\s+\[(.+?)\]:/.source, 'gim'), function (match, prefix, _type, _ref) {
         var type = _type.toLowerCase();
         // Increment the counter
         var count = refCounter[type] = (refCounter[type] | 0) + 1;
@@ -3240,7 +3263,7 @@ function markdeepToHTML(str, elementMode) {
 
     // FIGURE, TABLE, DIAGRAM, and LISTING references:
     // (must come after figure/table/listing processing, obviously)
-    str = str.rp(RegExp('\\b(fig\\.|tbl\\.|lst\\.|' + keyword('figure') + '|' + keyword('table') + '|' + keyword('listing') + '|' + keyword('diagram') + ')\\s+\\[([^\\s\\]]+)\\]', 'gi'), function (match, _type, _ref) {
+    str = str.rp(RegExp('\\b(fig\\.|tbl\\.|lst\\.|' + keyword('figure') + '|' + keyword('table') + '|' + keyword('listing') + '|' + keyword('diagram') + '|' + keyword('homework') + ')\\s+\\[([^\\s\\]]+)\\]', 'gi'), function (match, _type, _ref) {
         // Fix abbreviations
         var type = _type.toLowerCase();
         switch (type) {
